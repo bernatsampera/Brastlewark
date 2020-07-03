@@ -2,8 +2,55 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { TestScheduler } from 'rxjs/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CitizenService } from './citizen.service';
-import { CitizenStub } from './citizen.stub';
 import { Citizen } from 'src/app/model/citizen.model';
+import { CityService } from '../city/city.service';
+import { of } from 'rxjs';
+
+const dummyCityData = {
+  'Brastlewark': [
+  {
+  'id': 0,
+  'name': 'Tobus Quickwhistle',
+  'thumbnail': 'http://www.publicdomainpictures.net/pictures/10000/nahled/thinking-monkey-11282237747K8xB.jpg',
+  'age': 306,
+  'weight': 39.065952,
+  'height': 107.75835,
+  'hair_color': 'Pink',
+  'professions': [
+  'Metalworker',
+  'Woodcarver',
+  'Stonecarver',
+  ' Tinker',
+  'Tailor',
+  'Potter'
+  ],
+  'friends': [
+  'Cogwitz Chillwidget',
+  'Tinadette Chillbuster'
+  ]
+  },
+  {
+    'id': 0,
+    'name': 'Tobus Quickwhistle',
+    'thumbnail': 'http://www.publicdomainpictures.net/pictures/10000/nahled/thinking-monkey-11282237747K8xB.jpg',
+    'age': 306,
+    'weight': 39.065952,
+    'height': 107.75835,
+    'hair_color': 'Pink',
+    'professions': [
+    'Metalworker',
+    'Woodcarver',
+    'Stonecarver',
+    ' Tinker',
+    'Tailor',
+    'Potter'
+    ],
+    'friends': [
+    'Cogwitz Chillwidget',
+    'Tinadette Chillbuster'
+    ]
+    }
+]};
 
 const dummyCitizensData: Citizen[] = [{
   id: 0,
@@ -40,20 +87,26 @@ const dummySelectedCitizen: Citizen = {
   hairColor: 'Pink',
 };
 
+export class CityStub {
+  readonly url = 'https://raw.githubusercontent.com/rrafols/mobile_test/master/data.json';
+
+  selectedCity = 'Brastlewark';
+
+  citiesData$ = of(dummyCityData);
+}
 
 describe('CitizensService', () => {
-  let injector: TestBed;
-  let citizenStub: CitizenStub;
+  let service: CitizenService;
   let scheduler: TestScheduler;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{provide: CitizenService, useClass: CitizenStub}],
-      imports: [HttpClientTestingModule],
+      providers: [
+        {provide: CitizenService, useClass: CitizenService},
+        {provide: CityService, useClass: CityStub},
+      ]
     });
-
-    injector = getTestBed();
-    citizenStub = injector.get(CitizenService);
+    service = TestBed.inject(CitizenService);
   });
 
   beforeEach(() => scheduler = new TestScheduler((actual, expected) => {
@@ -65,18 +118,19 @@ describe('CitizensService', () => {
       const expectedMarble = '(a|)';
       const expectedData = {a: dummyCitizensData};
 
-      expectObservable(citizenStub.citizens$).toBe(expectedMarble, expectedData);
+      expectObservable(service.citizens$).toBe(expectedMarble, expectedData);
     });
   });
 
   it('should return the selected citizen', () => {
     scheduler.run(({expectObservable}) => {
-      const expectedMarble = '(aa|)';
+      const expectedMarble = '(aa)';
       const expectedData = {a: dummySelectedCitizen};
 
-      expectObservable(citizenStub.selectedCitizen$).toBe(expectedMarble, expectedData);
+      service.selectCitizen(0);
+
+      expectObservable(service.selectedCitizen$).toBe(expectedMarble, expectedData);
     });
   });
-
 });
 

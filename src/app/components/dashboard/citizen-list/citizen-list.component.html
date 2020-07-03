@@ -1,0 +1,17 @@
+<div *ngIf="citizens$ | async as citizens" class="list-container">
+
+  <mat-card class="citizen-card" *ngFor="let citizen of citizens" (click)="selectCitizen(citizen.id)">
+    <mat-card-header>
+      <mat-card-title> {{ citizen.name }} </mat-card-title>
+      <mat-card-subtitle>
+        <span>  Age - {{ citizen.age }} </span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="thumbnail" [src]="citizen.thumbnail" alt="Photo of {{ citizen.name }}">
+    <mat-card-content>
+      <span> <b> Height </b> - {{ citizen.height | number : '1.0-2'}} cm </span>
+      <span> <b> Weigth </b> - {{ citizen.weight | number : '1.0-2'}} Kg </span>
+    </mat-card-content>
+  </mat-card>
+
+</div>

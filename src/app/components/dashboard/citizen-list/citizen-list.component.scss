@@ -1,0 +1,18 @@
+.list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.citizen-card {
+  margin-top: 4vh;
+  border: 2px solid black;
+}
+
+.thumbnail {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CitizenService } from 'src/app/services/citizen/citizen.service';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Citizen } from 'src/app/model/citizen.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +14,12 @@ export class DashboardComponent  {
   citizens$: Observable<Citizen[]  | string> = this.citizenService.citizens$;
 
   constructor(
-    private citizenService: CitizenService
+    private citizenService: CitizenService,
+    private router: Router
   ) {
+  }
+
+  selectCitizen(id: number) {
+    this.router.navigate([id]);
   }
 }

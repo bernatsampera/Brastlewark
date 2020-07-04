@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Citizen } from 'src/app/model/citizen.model';
 
@@ -10,6 +10,7 @@ import { Citizen } from 'src/app/model/citizen.model';
 export class CitizenListComponent implements OnInit {
 
   @Input() citizens$: Observable<Citizen[]>;
+  @Output() selectCitizenEvent = new EventEmitter<number>();
 
   constructor() { }
 
@@ -17,7 +18,6 @@ export class CitizenListComponent implements OnInit {
   }
 
   selectCitizen(id: number) {
-
+    this.selectCitizenEvent.emit(id);
   }
-
 }

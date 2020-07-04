@@ -1,3 +1,7 @@
+<app-filter-citizen (citizenFilter$)="citizenFilter$.next($event)" >
+
+</app-filter-citizen>
+
 <app-citizen-list [citizens$]="citizens$" (selectCitizenEvent)="selectCitizen($event)">
 
 </app-citizen-list>

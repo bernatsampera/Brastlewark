@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { COMPONENTS_DECLARATIONS, UI_MODULES } from './components';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { COMPONENTS_DECLARATIONS, UI_MODULES } from './components';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     UI_MODULES
   ],
   providers: [],

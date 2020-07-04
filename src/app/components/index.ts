@@ -8,11 +8,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
+import { FilterCitizenComponent } from './dashboard/filter-citizen/filter-citizen.component';
 
 export const COMPONENTS_DECLARATIONS = [
   DashboardComponent,
   CitizenListComponent,
-  CitizenDetailComponent
+  CitizenDetailComponent,
+  FilterCitizenComponent
 ];
 
 export const UI_MODULES = [

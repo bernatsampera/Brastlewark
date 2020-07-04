@@ -1,0 +1,36 @@
+<div class="filter-container">
+  <div class="age-container">
+    <mat-form-field class="example-form-field">
+      <mat-label>Min age</mat-label>
+      <input type="string" (input)="setMinAge$.next($event)" matInput />
+    </mat-form-field>
+    <mat-form-field class="example-form-field">
+      <mat-label>Max age </mat-label>
+      <input type="string" (input)="setMaxAge$.next($event)" matInput />
+    </mat-form-field>
+  </div>
+
+  <div class="height-container">
+    <mat-form-field class="example-form-field">
+      <mat-label>Min Height </mat-label>
+      <input type="string" (input)="setMinHeight$.next($event)" matInput />
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label> Max Height </mat-label>
+      <input type="string" (input)="setMinHeight$.next($event)" matInput />
+    </mat-form-field>
+  </div>
+
+  <div class="weight-container">
+    <mat-form-field class="example-form-field">
+      <mat-label> Min Weight </mat-label>
+      <input type="string" (input)="setMinWeight$.next($event)" matInput />
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label> Max Weight </mat-label>
+      <input type="string" (input)="setMaxWeight$.next($event)" matInput />
+    </mat-form-field>
+  </div>
+</div>

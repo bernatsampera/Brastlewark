@@ -33,7 +33,13 @@ export class CitizenService {
   ) {
   }
 
-  selectCitizen(id) {
+  selectCitizen(id: number) {
     this.selectCitizenIdAction.next(id);
+  }
+
+  getCitizenByName(name: string) {
+    return this.citizens$.pipe(
+      map((citizens: Citizen[]) => citizens.filter(citizen => citizen.name === name)[0])
+    );
   }
 }

@@ -24,14 +24,14 @@
         <h3 class="detail-title"> Professions</h3>
         <span *ngIf="!citizen.professions.length"> {{citizen.name}} has no professions :(</span>
         <mat-list-item *ngFor="let profession of citizen.professions">
-          <mat-list-item> {{ profession }} </mat-list-item>
+          {{ profession }}
         </mat-list-item>
       </mat-list>
       <mat-list class="friends">
         <h3 class="detail-title"> Friends</h3>
         <span *ngIf="!citizen.friends.length"> {{citizen.name}} has no friends :(</span>
         <mat-list-item *ngFor="let friend of citizen.friends">
-          <mat-list-item (click)="selectFriend(friend)"> {{ friend }} </mat-list-item>
+          <button mat-raised-button color="primary" (click)="selectFriend(friend)"> {{ friend }} </button>
         </mat-list-item>
       </mat-list>
 

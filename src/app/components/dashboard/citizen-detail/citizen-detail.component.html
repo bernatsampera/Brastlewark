@@ -1,1 +1,36 @@
-<p>citizen-detail works!</p>
+<div *ngIf="citizen$ | async as citizen">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <mat-button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="">
+        <mat-icon>arrow_back</mat-icon>
+      </mat-button>
+      <span class="title-center"> {{ citizen.name }} </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="content">
+      <mat-list class="details">
+        <h3 class="detail-title"> Details</h3>
+        <mat-list-item><b> Age </b> - {{ citizen.age }}</mat-list-item>
+        <mat-list-item><b> Height </b> - {{ citizen.height | number : '1.0-2'}} cm</mat-list-item>
+        <mat-list-item><b> Weigth </b> - {{ citizen.weight | number : '1.0-2'}} Kg</mat-list-item>
+        <mat-list-item> <b> Hair Color </b> - {{ citizen.hairColor }}</mat-list-item>
+      </mat-list>
+
+      <mat-list class="professions">
+        <h3 class="detail-title"> Professions</h3>
+        <mat-list-item *ngFor="let profession of citizen.professions">
+          <mat-list-item> {{ profession }} </mat-list-item>
+        </mat-list-item>
+      </mat-list>
+      <mat-list class="friends">
+        <h3 class="detail-title"> Friends</h3>
+        <mat-list-item *ngFor="let friend of citizen.friends">
+          <mat-list-item> {{ friend }} </mat-list-item>
+        </mat-list-item>
+      </mat-list>
+
+    <img  class="thumbnail" [src]="citizen.thumbnail" alt="Photo of {{ citizen.name }}">
+  </div>
+
+</div>

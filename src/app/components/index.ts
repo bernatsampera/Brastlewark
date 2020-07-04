@@ -1,9 +1,13 @@
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CitizenListComponent } from './dashboard/citizen-list/citizen-list.component';
+import { CitizenDetailComponent } from './dashboard/citizen-detail/citizen-detail.component';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
-import { CitizenListComponent } from './dashboard/citizen-list/citizen-list.component';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { CitizenDetailComponent } from './dashboard/citizen-detail/citizen-detail.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
 
 export const COMPONENTS_DECLARATIONS = [
   DashboardComponent,
@@ -14,5 +18,8 @@ export const COMPONENTS_DECLARATIONS = [
 export const UI_MODULES = [
   MatCardModule,
   MatInputModule,
-  MatGridListModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatButtonModule
 ];

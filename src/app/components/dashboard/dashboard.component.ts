@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent  {
 
-  citizens$: Observable<Citizen[]  | string> = this.citizenService.citizens$;
+  citizens$: Observable<Citizen[]> = this.citizenService.citizens$;
 
   constructor(
     private citizenService: CitizenService,

@@ -1,0 +1,21 @@
+.thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.title-center {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+
+.detail-title {
+  text-align: center;
+}

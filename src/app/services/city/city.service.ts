@@ -13,7 +13,7 @@ export class CityService {
   selectedCity = 'Brastlewark';
 
   citiesData$ = this._http.get({url: this.url, cacheMins: 5}).pipe(
-    catchError(_ => of('error retrieving cities'))
+    // catchError(_ => of('error retrieving cities'))
   );
 
   constructor(

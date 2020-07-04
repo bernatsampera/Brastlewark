@@ -12,20 +12,20 @@ export class CitizenService {
 
   selectCitizenIdAction = new BehaviorSubject<number>(0);
 
-  citizens$: Observable<Citizen[] | string> = this._cityService.citiesData$.pipe(
+  citizens$: Observable<Citizen[]> = this._cityService.citiesData$.pipe(
     map(cities => cities[this._cityService.selectedCity]),
     map((citizensList: []) => citizensList.map((citizen: any) => {
       const {hair_color, ...citizenProps} = citizen;
       return {...citizenProps, hairColor: hair_color};
     })),
-    catchError(_ => of('error retireving citizens')),
+    // catchError(_ => of('error retireving citizens')),
     shareReplay(1)
   );
 
-  selectedCitizen$: Observable<Citizen | string> = this.selectCitizenIdAction.pipe(
+  selectedCitizen$: Observable<Citizen> = this.selectCitizenIdAction.pipe(
     withLatestFrom(this.citizens$),
     switchMap(([citizenId, citizens]: [number, Citizen[]]) => citizens.filter((citizen: Citizen) => citizen.id === citizenId)),
-    catchError(_ => of('error selecting citizen'))
+    // catchError(_ => of('error selecting citizen'))
   );
 
   constructor(

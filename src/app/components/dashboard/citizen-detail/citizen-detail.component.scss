@@ -1,8 +1,10 @@
 .thumbnail {
   width: 100%;
   height: auto;
+  max-height: 900px;
+  max-width: 900px;
   display: block;
-  padding: 8%;
+  padding: 4% 12%;
 }
 
 .title-center {

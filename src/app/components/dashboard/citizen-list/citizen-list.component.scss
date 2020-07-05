@@ -7,6 +7,10 @@
 .citizen-card {
   margin-top: 4vh;
   border: 2px solid black;
+
+  &:hover {
+    opacity: 60%;
+  }
 }
 
 .thumbnail {

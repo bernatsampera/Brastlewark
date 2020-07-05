@@ -1,0 +1,9 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+}
+
+app-paginator {
+  margin: auto;
+  padding: 10px;
+}

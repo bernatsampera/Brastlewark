@@ -1,0 +1,6 @@
+@import '../../../styles/theme.scss';
+
+.selected {
+  background-color: $dark-bg-lighter-5 !important;
+  color: $light-accent-text !important;
+}

@@ -1,7 +1,17 @@
-<app-filter-citizen (citizenFilter$)="citizenFilter$.next($event)" >
+<div class="dashboard-container">
+  <app-filter-citizen (citizenFilter$)="citizenFilter$.next($event)">
+  </app-filter-citizen>
 
-</app-filter-citizen>
+  <app-paginator
+    *ngIf="baseModel$ | async as bm"
+    [pagesAvailable]="bm.pagesAvailable"
+    [selectedPage]="bm.pageSelected"
+    (selectPageEmitter)="selectPage$.next($event)"
+  ></app-paginator>
 
-<app-citizen-list [citizens$]="citizens$" (selectCitizenEvent)="selectCitizen($event)">
-
-</app-citizen-list>
+  <app-citizen-list
+    [citizens$]="citizensToDisplay$"
+    (selectCitizenEvent)="selectCitizen($event)"
+  >
+  </app-citizen-list>
+</div>

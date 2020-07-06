@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { FilterState } from 'src/app/model/filter-state/filter-state.interface';
 import { InitialFilterState } from 'src/app/model/filter-state/init-filter-state';
 import { RxState } from '@rx-angular/state';
+import { Sort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface DashboardState {
   citizens: [];
@@ -39,7 +41,8 @@ export class DashboardComponent extends RxState<DashboardState> {
   numberOfResults$ = this.select('numberOfResults');
 
   citizenFilter$ = new BehaviorSubject<FilterState>(InitialFilterState);
-  selectPage$ = new BehaviorSubject<number>(0);
+  sortInfo$ = new Subject<Sort>();
+  selectPage$ = this.dashboardService.pageSelected$;
 
   citizens$: Observable<Citizen[]> = combineLatest([
     this.citizenService.citizens$,
@@ -57,6 +60,20 @@ export class DashboardComponent extends RxState<DashboardState> {
     ))
   );
 
+  citizensSorted$: Observable<Citizen[]> = combineLatest([
+    this.citizenService.citizens$,
+    this.sortInfo$.pipe(startWith(null))
+  ]).pipe(
+    tap(console.log),
+    map(([citizens, sort]: [Citizen[], Sort]) =>
+      sort
+        ?
+      citizens.sort(
+        (a: Citizen, b: Citizen) =>
+          (a[sort.active] < b[sort.active]  ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1))
+        :
+      citizens
+  ));
   constructor(
     private citizenService: CitizenService,
     private router: Router
@@ -78,7 +95,7 @@ export class DashboardComponent extends RxState<DashboardState> {
 
     this.connect(
       combineLatest([
-        this.citizens$,
+        this.citizensSorted$,
         this.pageSelected$,
         this.numberOfResults$
       ]).pipe(map(([elements, page, numberOfResults]) =>

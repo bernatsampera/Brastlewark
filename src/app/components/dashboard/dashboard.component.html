@@ -2,6 +2,10 @@
   <app-filter-citizen (citizenFilter$)="citizenFilter$.next($event)">
   </app-filter-citizen>
 
+  <app-sort-citizen (sortEvent$)="sortInfo$.next($event)">
+
+  </app-sort-citizen>
+
   <app-paginator
     *ngIf="baseModel$ | async as bm"
     [pagesAvailable]="bm.pagesAvailable"
@@ -15,3 +19,4 @@
   >
   </app-citizen-list>
 </div>
+

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { catchError, tap, map, shareReplay } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { HttpClientService } from '../cache/http-client.service';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,7 @@ export class CityService {
 
   selectedCity = 'Brastlewark';
 
-  citiesData$ = this._http.get({url: this.url, cacheMins: 5}).pipe(
-    // catchError(_ => of('error retrieving cities'))
+  citiesData$ = this._http.get(this.url).pipe(
   );
 
   constructor(

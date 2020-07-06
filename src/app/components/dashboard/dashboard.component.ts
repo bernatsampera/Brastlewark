@@ -3,10 +3,11 @@ import { CitizenService } from 'src/app/services/citizen/citizen.service';
 import { Observable, combineLatest, BehaviorSubject, Subject } from 'rxjs';
 import { Citizen } from 'src/app/model/citizen.model';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, tap, startWith, catchError } from 'rxjs/operators';
 import { FilterState } from 'src/app/model/filter-state/filter-state.interface';
 import { InitialFilterState } from 'src/app/model/filter-state/init-filter-state';
 import { RxState } from '@rx-angular/state';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { Sort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -57,7 +58,15 @@ export class DashboardComponent extends RxState<DashboardState> {
         (!filter.maxHeight || citizen.height < filter.maxHeight) &&
         (!filter.minWeight || citizen.weight > filter.minWeight) &&
         (!filter.maxWeight || citizen.weight < filter.maxWeight)
-    ))
+    )),
+    catchError(err =>
+      {
+        this._snackBar.open('Can\'t access to external resource', '', {
+          duration: 4000,
+          panelClass: ['error-snackbar']
+        });
+        return [];
+      })
   );
 
   citizensSorted$: Observable<Citizen[]> = combineLatest([
@@ -74,9 +83,12 @@ export class DashboardComponent extends RxState<DashboardState> {
         :
       citizens
   ));
+
   constructor(
     private citizenService: CitizenService,
-    private router: Router
+    private dashboardService: DashboardService,
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {
     super();
 
@@ -106,5 +118,11 @@ export class DashboardComponent extends RxState<DashboardState> {
 
   selectCitizen(id: number) {
     this.router.navigate([id]);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

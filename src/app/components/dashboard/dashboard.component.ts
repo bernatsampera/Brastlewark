@@ -70,7 +70,7 @@ export class DashboardComponent extends RxState<DashboardState> {
   );
 
   citizensSorted$: Observable<Citizen[]> = combineLatest([
-    this.citizenService.citizens$,
+    this.citizens$,
     this.sortInfo$.pipe(startWith(null))
   ]).pipe(
     tap(console.log),
